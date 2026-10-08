@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary":"#d0bcff","inverse-primary":"#494bd6","on-tertiary-container":"#452000","on-secondary-fixed-variant":"#5516be","secondary-fixed":"#e9ddff","on-tertiary-fixed":"#301400","on-error-container":"#ffdad6","on-surface":"#dfe2eb","on-primary-fixed":"#07006c","tertiary":"#ffb783","surface-container-lowest":"#0a0e14","inverse-on-surface":"#2d3137","surface-container-high":"#262a31","tertiary-fixed-dim":"#ffb783","tertiary-container":"#d97721","on-surface-variant":"#c7c4d7","on-secondary":"#3c0091","primary-fixed":"#e1e0ff","on-primary":"#1000a9","on-primary-container":"#0d0096","background":"#10141a","surface-variant":"#31353c","surface-bright":"#353940","on-error":"#690005","on-secondary-fixed":"#23005c","primary":"#c0c1ff","outline":"#908fa0","primary-container":"#8083ff","primary-fixed-dim":"#c0c1ff","surface-dim":"#10141a","error":"#ffb4ab","on-background":"#dfe2eb","on-secondary-container":"#c4abff","inverse-surface":"#dfe2eb","outline-variant":"#464554","on-tertiary":"#4f2500","secondary-fixed-dim":"#d0bcff","tertiary-fixed":"#ffdcc5","surface-container-low":"#181c22","on-primary-fixed-variant":"#2f2ebe","surface-container-highest":"#31353c","secondary-container":"#571bc1","surface":"#10141a","surface-tint":"#c0c1ff","on-tertiary-fixed-variant":"#703700","surface-container":"#1c2026","error-container":"#93000a"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"margin-mobile":"1rem","space-lg":"1.5rem","gutter-lg":"1.5rem","space-sm":"0.5rem","gutter":"1rem","space-xs":"0.25rem","space-md":"1rem","margin":"1.5rem","space-xl":"2rem","gutter-sm":"0.5rem"},fontFamily:{"body-md":["Inter"],"label-ui":["Inter"],"headline-lg-mobile":["Inter"],"code-md":["JetBrains Mono"],"body-sm":["Inter"],"headline-sm":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"],"label-code":["JetBrains Mono"],"headline-md":["Inter"],"code-sm":["JetBrains Mono"],"display":["Inter"]},fontSize:{"body-md":["14px",{lineHeight:"20px",letterSpacing:"-0.005em",fontWeight:"400"}],"label-ui":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"500"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"600"}],"code-md":["13px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}],"body-sm":["12px",{lineHeight:"18px",letterSpacing:"0em",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.025em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"400"}],"label-code":["11px",{lineHeight:"14px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"code-sm":["11px",{lineHeight:"16px",letterSpacing:"0em",fontWeight:"400"}],"display":["40px",{lineHeight:"48px",letterSpacing:"-0.03em",fontWeight:"700"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="CodeFix AI Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U4PmFPMe1R9Qgfm0PSrzg0wV1pXIIsLqpWUMGs-kEu5Bax0IlJGgP1YKP1QymEFOUqV5J50daZhqPQjkItLgGDJWHWnML6IbkadNfwRTeuRngBS0ONDdAX6DhhrS_PQFNixjaTwWuvmqt3xVZVoCZxV4wmPIzdP6Rx4rwN3A0_phlGvIcKTKkKFo2epqDxoAd1KMPNkLbRiMM-RKgjQBQNooVfKa7ndcru1fvV_9A"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold flex items-center gap-1.5">⚡ CodeFix AI</span><span class="font-label-code text-label-code text-on-surface-variant">Write. Fix. Build.</span></div></div><span class="font-label-code text-label-code bg-surface-container-high text-primary px-space-xs py-0.5 rounded">BETA</span></div><div class="px-space-md pt-space-md pb-space-xs"><p class="font-label-code text-label-code text-outline uppercase tracking-wider px-space-sm mb-space-xs">Core Navigation</p></div><nav class="flex flex-col gap-space-xs px-space-sm" data-active-classes="bg-surface-container-high text-primary font-semibold"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-lg">terminal</span><span class="font-body-md text-body-md">Home</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="ai-tools" href="#"><span class="material-symbols-outlined text-lg">auto_awesome</span><span class="font-body-md text-body-md">AI Tools</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="projects" href="#"><span class="material-symbols-outlined text-lg">folder_open</span><span class="font-body-md text-body-md">Projects</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="history" href="#"><span class="material-symbols-outlined text-lg">history</span><span class="font-body-md text-body-md">History</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-colors bg-surface-container-high text-primary font-semibold" data-path="settings" href="#"><span class="material-symbols-outlined text-lg">tune</span><span class="font-body-md text-body-md">Settings</span></a></nav></div><div class="p-space-md bg-surface-container-low m-space-sm rounded-xl flex flex-col gap-space-sm"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYhgRpUsZv6kJFRT20cGAeXbPV2x199b5TjLunk98Pnzc1gu3oTH33as-hEf9YtW00QwAb2geMLIqoZEzBwrmcHVw_wV0kjAqoUvQCSEAtQm0420Cru2XBXZrFMpJsLHW-D8yYqxNSQEJnig7WczMzA_8-iraNj1OKhoSuW2mI8M6x5ctiPmt5vvGAtUhaYIUiQ-mSyOuakUGv_k0V02ydcQRSuCULAhO5n6-3h7o"/><div class="flex flex-col overflow-hidden"><span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Alex Rivera</span><span class="font-label-code text-label-code text-on-surface-variant truncate">alex@dev.io</span></div></div><span class="font-label-code text-label-code bg-surface-container text-tertiary px-space-xs py-0.5 rounded">Free</span></div><div class="flex flex-col gap-1"><div class="flex justify-between items-center"><span class="font-label-code text-label-code text-outline">Daily Fixes</span><span class="font-label-code text-label-code text-on-surface font-semibold">3 / 10 left</span></div><div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden"><div class="h-full bg-primary-container rounded-full w-[30%]"></div></div></div><button class="w-full py-1.5 px-space-md rounded-lg font-label-ui text-label-ui text-white font-medium bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:brightness-110 transition-all flex items-center justify-center gap-space-xs shadow-[0_2px_8px_rgba(99,102,241,0.25)]" type="button"><span class="material-symbols-outlined text-base">bolt</span><span>Upgrade Plan</span></button></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-on-surface-variant text-lg">folder</span><span class="font-body-sm text-body-sm text-on-surface-variant">Workspace</span><span class="font-body-sm text-body-sm text-outline">/</span><span class="font-body-sm text-body-sm font-semibold text-on-surface flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>Main Editor</span></div><div class="flex items-center gap-space-sm"><div class="relative flex items-center bg-surface-container-low rounded-lg px-space-sm py-1"><span class="material-symbols-outlined text-outline text-base mr-1">code</span><select class="bg-transparent font-code-sm text-code-sm text-on-surface focus:outline-none cursor-pointer pr-space-xs"><option class="bg-surface-container" value="javascript">JavaScript</option><option class="bg-surface-container" selected="" value="typescript">TypeScript</option><option class="bg-surface-container" value="python">Python</option><option class="bg-surface-container" value="html">HTML</option><option class="bg-surface-container" value="css">CSS</option><option class="bg-surface-container" value="java">Java</option><option class="bg-surface-container" value="cpp">C++</option><option class="bg-surface-container" value="php">PHP</option></select></div><div class="flex items-center bg-surface-container-low rounded-lg px-space-sm py-1 gap-1"><span class="material-symbols-outlined text-outline text-base">translate</span><select class="bg-transparent font-label-ui text-label-ui text-on-surface focus:outline-none cursor-pointer"><option class="bg-surface-container" selected="" value="en">EN</option><option class="bg-surface-container" value="fr">FR</option><option class="bg-surface-container" value="ar">AR (RTL)</option></select></div><button class="h-8 w-8 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Toggle Theme" type="button"><span class="material-symbols-outlined text-lg">dark_mode</span></button><button class="relative h-8 w-8 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full ring-2 ring-surface"></span></button><button class="hidden sm:flex items-center gap-1.5 px-space-sm py-1 rounded-lg bg-surface-container-high hover:bg-surface-variant text-primary font-label-ui text-label-ui transition-colors" type="button"><span class="material-symbols-outlined text-base">install_desktop</span><span>⚡ Install App</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYhgRpUsZv6kJFRT20cGAeXbPV2x199b5TjLunk98Pnzc1gu3oTH33as-hEf9YtW00QwAb2geMLIqoZEzBwrmcHVw_wV0kjAqoUvQCSEAtQm0420Cru2XBXZrFMpJsLHW-D8yYqxNSQEJnig7WczMzA_8-iraNj1OKhoSuW2mI8M6x5ctiPmt5vvGAtUhaYIUiQ-mSyOuakUGv_k0V02ydcQRSuCULAhO5n6-3h7o"/></div></header><main class="relative pt-16 min-h-screen bg-background w-full px-space-lg"><div class="flex flex-col w-full pb-space-xl">
+<!-- Subtle Ambient Glow -->
+<div class="relative w-full">
+<div class="absolute -top-10 left-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-48 right-12 w-80 h-80 bg-secondary-container/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between py-space-lg mb-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs text-outline font-label-code text-label-code uppercase tracking-wider">
+<span>Preferences</span>
+<span>/</span>
+<span class="text-primary">System Config</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">Workbench Settings</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Configure runtime engines, inference temperature parameters, interface themes, and repository safety limits.</p>
+</div>
+<!-- Quick Action Feedback Pill -->
+<div class="mt-space-md sm:mt-0 flex items-center gap-space-sm self-start sm:self-auto">
+<span class="font-label-code text-label-code text-outline flex items-center gap-1.5 transition-opacity duration-300" id="saveStatus">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Synced to Cloud
+        </span>
+<button class="px-space-md py-1.5 rounded-lg font-label-ui text-label-ui text-on-primary bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:brightness-110 active:scale-95 shadow-md flex items-center gap-1.5 transition-all" id="saveAllBtn" type="button">
+<span class="material-symbols-outlined text-base">save</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+<!-- Main Settings Architecture: Nav Aside + Content Panels -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Sticky Navigation Rail -->
+<nav class="lg:col-span-3 flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-space-xs lg:pb-0 sticky top-20 z-20">
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg bg-surface-container-high text-primary font-label-ui text-label-ui whitespace-nowrap transition-all shadow-sm" href="#account">
+<span class="material-symbols-outlined text-base">person</span>
+<span>Account &amp; Profile</span>
+</a>
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-ui text-label-ui whitespace-nowrap transition-all" href="#appearance">
+<span class="material-symbols-outlined text-base">palette</span>
+<span>Appearance &amp; Editor</span>
+</a>
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-ui text-label-ui whitespace-nowrap transition-all" href="#localization">
+<span class="material-symbols-outlined text-base">language</span>
+<span>Localization</span>
+</a>
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-ui text-label-ui whitespace-nowrap transition-all" href="#ai-models">
+<span class="material-symbols-outlined text-base">psychology</span>
+<span>AI Model Engine</span>
+</a>
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-ui text-label-ui whitespace-nowrap transition-all" href="#language-defaults">
+<span class="material-symbols-outlined text-base">data_object</span>
+<span>Language Defaults</span>
+</a>
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-ui text-label-ui whitespace-nowrap transition-all" href="#notifications">
+<span class="material-symbols-outlined text-base">notifications_active</span>
+<span>Notifications &amp; Events</span>
+</a>
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-ui text-label-ui whitespace-nowrap transition-all" href="#plan-billing">
+<span class="material-symbols-outlined text-base">credit_card</span>
+<span>Plan &amp; Quota</span>
+</a>
+<a class="settings-nav-item flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-surface-container font-label-ui text-label-ui whitespace-nowrap transition-all" href="#security">
+<span class="material-symbols-outlined text-base">shield</span>
+<span>Security &amp; Danger Zone</span>
+</a>
+</nav>
+<!-- Panes Container -->
+<div class="lg:col-span-9 flex flex-col gap-space-lg">
+<!-- 1. ACCOUNT & PROFILE -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="account">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">badge</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Account &amp; Profile</h2>
+</div>
+<span class="font-label-code text-label-code text-outline uppercase">UUID: 8f92-b4c1</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-center">
+<!-- Profile Avatar Change -->
+<div class="md:col-span-4 flex flex-col items-center justify-center p-space-md bg-surface-container rounded-xl gap-space-sm">
+<div class="relative group cursor-pointer">
+<img class="w-24 h-24 rounded-full object-cover shadow-md group-hover:opacity-75 transition-opacity" data-alt="Close-up software engineer portrait with neon purple backlight studio photography high contrast professional headshot dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL4ZRtcRKDEGaXlZG3FPWK-XbA_8Lho8wXQ8dmb5u1wfxixTUZFBp9wyulnt_CKcpUEd-PTmw-MJp6dC8MPUyN_p6Agsub7GPA9slWgRsXM6CjvbMMr6BfHlHNURkl17iQ9ELtVNzNoERUp1Ho7sggGA8Rtz5-hwM106Pv2VzKCc9auhhTyCq7siajS6gUxiB3MXRR4l0-J3h6JzEYDL-wFuFLSTwNuGpJouLk_q8"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center rounded-full bg-surface-container-lowest/70 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface text-xl">photo_camera</span>
+<span class="font-label-code text-label-code text-on-surface mt-1">Replace</span>
+</div>
+</div>
+<div class="text-center">
+<p class="font-body-md text-body-md font-semibold text-on-surface">Alex Rivera</p>
+<p class="font-label-code text-label-code text-outline">alex@dev.io</p>
+</div>
+<button class="font-label-ui text-label-ui text-primary hover:text-on-surface transition-colors" type="button">Upload Custom PNG/WebP</button>
+</div>
+<!-- Profile Details & Linked GitHub -->
+<div class="md:col-span-8 flex flex-col gap-space-md">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1">
+<label class="font-label-code text-label-code text-outline">Full Display Name</label>
+<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" type="text" value="Alex Rivera"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-code text-label-code text-outline">Primary Contact Email</label>
+<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" type="email" value="alex@dev.io"/>
+</div>
+</div>
+<!-- GitHub Connected Banner -->
+<div class="p-space-md bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-lg">code_blocks</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-body-md text-body-md font-semibold text-on-surface">GitHub Integration</span>
+<span class="font-label-code text-label-code text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded">Connected</span>
+</div>
+<span class="font-label-code text-label-code text-outline">Authorized as <span class="text-on-surface">@arivera</span> (Sync active)</span>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded font-label-ui text-label-ui text-outline hover:text-on-surface bg-surface-container-high hover:bg-surface-variant transition-colors" type="button">Disconnect</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. APPEARANCE & THEME -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="appearance">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">palette</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Appearance &amp; Editor</h2>
+</div>
+<span class="font-label-code text-label-code text-outline">Theme Engine v3.1</span>
+</div>
+<!-- Dark / Light Preview Cards -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-code text-label-code text-outline uppercase">Interface Theme</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-1">
+<!-- Dark Theme Option (Active) -->
+<div class="relative bg-surface-container-lowest p-space-md rounded-xl cursor-pointer shadow-md group flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">dark_mode</span>
+                    Deep Slate (Dark #0D1117)
+                  </span>
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+</div>
+<!-- Mini UI Mock Preview -->
+<div class="w-full h-20 bg-surface-container rounded-lg p-2 flex flex-col justify-between overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<span class="w-12 h-1.5 bg-outline-variant rounded"></span>
+</div>
+<div class="space-y-1">
+<div class="w-24 h-1.5 bg-primary/40 rounded"></div>
+<div class="w-36 h-1.5 bg-outline-variant/60 rounded"></div>
+</div>
+<div class="flex justify-end gap-1">
+<span class="w-8 h-2 bg-primary rounded"></span>
+</div>
+</div>
+<span class="font-label-code text-label-code text-outline">Engineered for long-duration flow states &amp; low eye strain.</span>
+</div>
+<!-- Light Theme Option -->
+<div class="relative bg-surface-container p-space-md rounded-xl cursor-pointer hover:bg-surface-variant transition-all flex flex-col gap-space-sm opacity-60 hover:opacity-100">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-base">light_mode</span>
+                    Alabaster Light (#FFFFFF)
+                  </span>
+<span class="w-4 h-4 rounded-full bg-surface-container-high"></span>
+</div>
+<!-- Mini UI Mock Preview Light -->
+<div class="w-full h-20 bg-surface rounded-lg p-2 flex flex-col justify-between overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<span class="w-12 h-1.5 bg-surface-container-highest rounded"></span>
+</div>
+<div class="space-y-1">
+<div class="w-20 h-1.5 bg-inverse-primary/60 rounded"></div>
+<div class="w-32 h-1.5 bg-surface-variant rounded"></div>
+</div>
+<div class="flex justify-end gap-1">
+<span class="w-8 h-2 bg-inverse-primary rounded"></span>
+</div>
+</div>
+<span class="font-label-code text-label-code text-outline">Crisp contrast suited for daylight and outdoor terminals.</span>
+</div>
+</div>
+</div>
+<!-- Accent Color Picker & Typography Sizing -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-lg pt-space-xs">
+<!-- Accent Picker -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-code text-label-code text-outline uppercase">Accent Spectrum</label>
+<div class="flex items-center gap-space-sm pt-1">
+<!-- Indigo/Purple (Active) -->
+<button class="w-9 h-9 rounded-lg bg-gradient-to-tr from-[#6366F1] to-[#8B5CF6] flex items-center justify-center text-white shadow-md ring-2 ring-primary" type="button">
+<span class="material-symbols-outlined text-sm">check</span>
+</button>
+<!-- Emerald -->
+<button class="w-9 h-9 rounded-lg bg-emerald-500 flex items-center justify-center text-white hover:opacity-90 transition-opacity" type="button">
+</button>
+<!-- Blue -->
+<button class="w-9 h-9 rounded-lg bg-sky-500 flex items-center justify-center text-white hover:opacity-90 transition-opacity" type="button">
+</button>
+<!-- Amber / Tertiary -->
+<button class="w-9 h-9 rounded-lg bg-tertiary-container flex items-center justify-center text-white hover:opacity-90 transition-opacity" type="button">
+</button>
+</div>
+<span class="font-label-code text-label-code text-outline mt-1">Applied to diff gutters, AI beacons, and telemetry graphs.</span>
+</div>
+<!-- Code Editor Font Scale & Line Spacing -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-code text-label-code text-outline uppercase">Editor Typography (JetBrains Mono)</label>
+<div class="grid grid-cols-2 gap-space-sm pt-1">
+<div class="flex flex-col gap-1">
+<span class="font-label-code text-label-code text-on-surface-variant">Font Size</span>
+<select class="bg-surface-container-lowest text-on-surface font-code-md text-code-md rounded-lg px-space-sm py-1.5 focus:outline-none">
+<option value="12">12px (Dense)</option>
+<option selected="" value="13">13px (Default)</option>
+<option value="14">14px (Spacious)</option>
+<option value="16">16px (Large)</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-code text-label-code text-on-surface-variant">Line Height</span>
+<select class="bg-surface-container-lowest text-on-surface font-code-md text-code-md rounded-lg px-space-sm py-1.5 focus:outline-none">
+<option value="1.4">1.4x (Snug)</option>
+<option selected="" value="1.6">1.6x (Optimal)</option>
+<option value="1.8">1.8x (Relaxed)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. INTERFACE LANGUAGE & LOCALIZATION -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="localization">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">language</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Interface Language &amp; Localization</h2>
+</div>
+<span class="font-label-code text-label-code text-outline">RFC-5646</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg items-start">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-code text-label-code text-outline uppercase">Active Locale</label>
+<select class="bg-surface-container-lowest px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" id="localeSelect">
+<option selected="" value="en-US">English (US) — Active Locale</option>
+<option value="fr-FR">Français (FR) — French Metropole</option>
+<option value="ar-SA">العربية (Arabic) — RTL Layout Engine Flagged</option>
+</select>
+<span class="font-label-code text-label-code text-outline">Changes will reload interface components and syntax explanation strings.</span>
+</div>
+<!-- Preview Card for Bi-directional / RTL Preview -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-primary uppercase">Localization Preview</span>
+<span class="material-symbols-outlined text-outline text-base">flip</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface" id="localeSampleText">"AI diagnostic inspection complete: 0 warnings, 2 regressions patched."</p>
+<div class="flex items-center gap-space-sm text-outline font-label-code text-label-code pt-1">
+<span>Text Direction: <strong class="text-on-surface" id="localeDir">LTR</strong></span>
+<span>•</span>
+<span>Font Mapping: Noto / Inter</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. AI MODEL CONFIGURATION -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="ai-models">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">psychology</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">AI Model Configuration</h2>
+</div>
+<span class="font-label-code text-label-code bg-surface-container text-secondary px-2 py-0.5 rounded">High Reasoning</span>
+</div>
+<!-- Model Cards Selection -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Claude 3.5 Sonnet (Selected) -->
+<div class="model-choice relative p-space-md rounded-xl bg-surface-container-lowest cursor-pointer shadow-md flex flex-col justify-between group">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-primary bg-primary-container/20 px-1.5 py-0.5 rounded font-semibold">Recommended</span>
+<span class="material-symbols-outlined text-primary text-base">radio_button_checked</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Claude 3.5 Sonnet</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Superior architectural code reasoning, edge-case vulnerability detection, and refactoring clarity.</p>
+</div>
+<div class="pt-space-md flex items-center justify-between font-label-code text-label-code text-outline">
+<span>Latency: ~1.2s</span>
+<span>Context: 200k</span>
+</div>
+</div>
+<!-- GPT-4o -->
+<div class="model-choice p-space-md rounded-xl bg-surface-container hover:bg-surface-variant cursor-pointer transition-colors flex flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-outline bg-surface-container-high px-1.5 py-0.5 rounded">Fast Multi-modal</span>
+<span class="material-symbols-outlined text-outline text-base">radio_button_unchecked</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">GPT-4o</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">High-throughput token emission ideal for unit test generation and boilerplate synthesis.</p>
+</div>
+<div class="pt-space-md flex items-center justify-between font-label-code text-label-code text-outline">
+<span>Latency: ~0.9s</span>
+<span>Context: 128k</span>
+</div>
+</div>
+<!-- CodeFix Fine-Tuned v2.4 -->
+<div class="model-choice p-space-md rounded-xl bg-surface-container hover:bg-surface-variant cursor-pointer transition-colors flex flex-col justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-tertiary bg-tertiary-container/20 px-1.5 py-0.5 rounded">Proprietary</span>
+<span class="material-symbols-outlined text-outline text-base">radio_button_unchecked</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">CodeFix v2.4</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Trained strictly on git commit history diffs, zero hallucination on package manager imports.</p>
+</div>
+<div class="pt-space-md flex items-center justify-between font-label-code text-label-code text-outline">
+<span>Latency: ~0.4s</span>
+<span>Context: 64k</span>
+</div>
+</div>
+</div>
+<!-- Temperature Slider & Visual Graph -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<label class="font-label-code text-label-code text-outline uppercase">Autonomous Fix Temperature</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Balances mathematical determinism against exploratory refactoring patterns.</p>
+</div>
+<span class="font-label-code text-label-code text-on-primary bg-primary-container px-2 py-0.5 rounded font-semibold self-start sm:self-auto" id="tempValueBadge">0.2 (Deterministic)</span>
+</div>
+<div class="flex flex-col gap-2">
+<input class="w-full accent-primary-container cursor-pointer bg-surface-container-highest rounded-lg h-2" id="tempSlider" max="0.7" min="0.1" step="0.05" type="range" value="0.2"/>
+<div class="flex justify-between font-label-code text-label-code text-outline">
+<span>0.1 (Strict Deterministic / Bugfix)</span>
+<span>0.4 (Balanced Refactor)</span>
+<span>0.7 (Creative Architecture)</span>
+</div>
+</div>
+</div>
+<!-- Self-Hosted Endpoint & Custom API Key -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-code text-label-code text-outline uppercase">Custom Inference Endpoint (Ollama / vLLM)</label>
+<span class="font-label-code text-label-code text-tertiary">Enterprise / Air-gapped</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" placeholder="https://ollama.internal.net:11434/v1" type="text"/>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner pr-10" id="apiKeyInput" type="password" value="sk-live-49102-bf89e41982b1c8f10a"/>
+<button class="absolute right-2 text-outline hover:text-on-surface" id="toggleApiKey" type="button">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. DEFAULT PROGRAMMING LANGUAGE -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="language-defaults">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">data_object</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Default Programming Language</h2>
+</div>
+<span class="font-label-code text-label-code text-outline">AST Tree Parser</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-center">
+<div class="md:col-span-7 flex flex-col gap-space-xs">
+<label class="font-label-code text-label-code text-outline uppercase">Primary Diagnostic Grammar</label>
+<select class="bg-surface-container-lowest px-space-md py-2.5 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner">
+<option selected="" value="typescript">TypeScript (.ts, .tsx) — Strict Mode On</option>
+<option value="javascript">JavaScript (ESNext / Node.js)</option>
+<option value="python">Python 3.12 (PEP-8 / Typing)</option>
+<option value="golang">Go (v1.22+ Goroutines)</option>
+<option value="rust">Rust (Cargo / Borrow Checker)</option>
+<option value="java">Java 21 (LTS OpenJDK)</option>
+<option value="cpp">C++ 20 (Clang / Modern Standards)</option>
+<option value="php">PHP 8.3 (Laravel / Strict Types)</option>
+<option value="htmlcss">HTML5 &amp; Tailwind CSS Engine</option>
+</select>
+<span class="font-label-code text-label-code text-outline">Newly opened untitled scrapbooks initialize automatically under this syntax definition.</span>
+</div>
+<!-- Compact Language Distribution Visualizer -->
+<div class="md:col-span-5 bg-surface-container p-space-md rounded-xl flex flex-col gap-space-xs">
+<span class="font-label-code text-label-code text-on-surface-variant">Your Diagnostic History by Language</span>
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden flex my-1">
+<div class="h-full bg-primary" style="width: 54%" title="TypeScript 54%"></div>
+<div class="h-full bg-tertiary-container" style="width: 22%" title="Python 22%"></div>
+<div class="h-full bg-emerald-400" style="width: 14%" title="Go 14%"></div>
+<div class="h-full bg-sky-400" style="width: 10%" title="Rust 10%"></div>
+</div>
+<div class="flex items-center justify-between font-label-code text-label-code text-outline">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> TS 54%</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Py 22%</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Go 14%</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Other</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. NOTIFICATIONS & TELEMETRY -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="notifications">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">notifications_active</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Notifications &amp; Telemetry</h2>
+</div>
+<span class="font-label-code text-label-code text-outline">Real-time alerts</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Toggle 1: Email Summaries -->
+<div class="p-space-md bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-xl">mark_email_read</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Weekly Diagnostic Summaries</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Receive automated audit logs of fixed memory leaks and sanitized dependency trees.</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 2: Sound Effects -->
+<div class="p-space-md bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-xl">volume_up</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Sound Effects on Patch Completion</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Subtle synthesized auditory cue when automated fix pipelines compile cleanly.</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 3: Desktop Push -->
+<div class="p-space-md bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-xl">desktop_windows</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Desktop Push Notifications</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Notify when long-running project-wide vulnerability scans finish in the background.</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- 7. PLAN & BILLING -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="plan-billing">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">credit_card</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Plan &amp; Billing Quota</h2>
+</div>
+<span class="font-label-code text-label-code text-outline">Tier: Hobby</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg">
+<!-- Plan Status Card -->
+<div class="md:col-span-7 bg-surface-container p-space-md rounded-xl flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Free Developer Tier</span>
+<span class="font-label-code text-label-code bg-tertiary-container/30 text-tertiary px-2 py-0.5 rounded font-semibold">$0 / mo</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Includes standard parsing speeds, Claude 3.5 fallback, and up to 10 automated remediations per 24 hours.</p>
+</div>
+<!-- Usage Progress Visual -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-outline">Daily Autonomous Fixes</span>
+<span class="text-on-surface font-semibold">3 / 10 Used (7 Remaining)</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary-container to-secondary rounded-full" style="width: 30%"></div>
+</div>
+<span class="font-label-code text-label-code text-outline">Resets tomorrow at 00:00 UTC</span>
+</div>
+</div>
+<!-- Pro Upgrade Upsell Card -->
+<div class="md:col-span-5 bg-gradient-to-br from-secondary-container/40 to-surface-container p-space-md rounded-xl flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex flex-col gap-1">
+<span class="font-label-code text-label-code text-primary uppercase font-semibold">Ready for Scale?</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Upgrade to Pro Team</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Unlimited fixes, zero rate limits, self-hosted Ollama tunneling, and private enterprise repo indexing.</p>
+</div>
+<button class="w-full py-2 px-space-md rounded-lg font-label-ui text-label-ui text-white font-medium bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:brightness-110 shadow-md flex items-center justify-center gap-1.5 transition-all" type="button">
+<span class="material-symbols-outlined text-base">bolt</span>
+<span>Upgrade for $19/mo</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 8. SECURITY & DANGER ZONE -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md" id="security">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">shield</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Security &amp; Authentication</h2>
+</div>
+<span class="font-label-code text-label-code text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded">Security Score: A+</span>
+</div>
+<!-- Two-Factor Authentication Info -->
+<div class="p-space-md bg-surface-container rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-emerald-950/40 flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Two-Factor Authentication (2FA)</span>
+<span class="font-label-code text-label-code text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded">Enabled</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">FIDO2 / WebAuthn Hardware keys &amp; TOTP Authenticator active.</span>
+</div>
+</div>
+<button class="px-space-md py-1.5 rounded-lg font-label-ui text-label-ui text-on-surface bg-surface-container-high hover:bg-surface-variant transition-colors self-start sm:self-auto" type="button">Manage 2FA Keys</button>
+</div>
+<!-- Danger Zone Card -->
+<div class="bg-error-container/20 rounded-xl p-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-error-container/40 flex items-center justify-center text-error flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-lg">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-error">Delete Account &amp; Purge Repositories</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Permanently delete Alex Rivera's profile, revoke cloud GitHub tokens, and erase indexed AST semantic caches. This action is irreversible.</p>
+</div>
+</div>
+<button class="px-space-md py-2 rounded-lg font-label-ui text-label-ui text-on-error bg-error hover:brightness-110 active:scale-95 shadow-md flex-shrink-0 transition-all self-start sm:self-auto flex items-center gap-1.5" id="openDeleteModal" type="button">
+<span class="material-symbols-outlined text-base">delete_forever</span>
+<span>Purge Account</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- CONFIRMATION MODAL (HIDDEN BY DEFAULT) -->
+<div class="fixed inset-0 bg-surface-container-lowest/80 backdrop-blur-sm z-50 flex items-center justify-center p-space-md hidden" id="deleteModal">
+<div class="bg-surface-container-low max-w-md w-full rounded-2xl p-space-lg shadow-2xl flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm text-error">
+<span class="material-symbols-outlined text-2xl">dangerous</span>
+<h3 class="font-headline-sm text-headline-sm font-semibold">Confirm Account Purge</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Are you absolutely certain? This will immediately cancel your subscriptions, decouple your GitHub repository permissions, and purge your indexed codebases permanently.
+      </p>
+<div class="flex flex-col gap-1">
+<label class="font-label-code text-label-code text-outline">Type <strong class="text-on-surface">alex@dev.io</strong> to confirm:</label>
+<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-error shadow-inner" id="confirmEmailInput" placeholder="alex@dev.io" type="text"/>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-2 rounded-lg font-label-ui text-label-ui text-outline hover:text-on-surface bg-surface-container hover:bg-surface-variant transition-colors" id="closeDeleteModal" type="button">Cancel</button>
+<button class="px-space-md py-2 rounded-lg font-label-ui text-label-ui text-on-error bg-error opacity-50 cursor-not-allowed transition-all flex items-center gap-1" disabled="" id="confirmDeleteBtn" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+<span>Erase Everything</span>
+</button>
+</div>
+</div>
+</div>
+<!-- TOAST NOTIFICATION -->
+<div class="fixed bottom-6 right-6 bg-surface-container-high text-on-surface px-space-md py-2.5 rounded-xl shadow-xl flex items-center gap-space-sm opacity-0 pointer-events-none transition-all duration-300 z-50" id="toast">
+<span class="material-symbols-outlined text-emerald-400 text-base">task_alt</span>
+<span class="font-body-sm text-body-sm" id="toastMsg">Workbench settings saved successfully.</span>
+</div>
+</div>
+<script>
+  // Dynamic Localization preview toggle
+  const localeSelect = document.getElementById('localeSelect');
+  const localeSampleText = document.getElementById('localeSampleText');
+  const localeDir = document.getElementById('localeDir');
+
+  if (localeSelect) {
+    localeSelect.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (val === 'ar-SA') {
+        localeSampleText.textContent = "اكتمل الفحص التشخيصي للذكاء الاصطناعي: 0 تحذيرات، وتم تصحيح انحدارين.";
+        localeSampleText.setAttribute('dir', 'rtl');
+        localeDir.textContent = 'RTL (Arabic)';
+      } else if (val === 'fr-FR') {
+        localeSampleText.textContent = "Inspection diagnostique de l'IA terminée : 0 avertissement, 2 régressions corrigées.";
+        localeSampleText.removeAttribute('dir');
+        localeDir.textContent = 'LTR';
+      } else {
+        localeSampleText.textContent = '"AI diagnostic inspection complete: 0 warnings, 2 regressions patched."';
+        localeSampleText.removeAttribute('dir');
+        localeDir.textContent = 'LTR';
+      }
+      showToast("Language changed to " + e.target.options[e.target.selectedIndex].text.split('—')[0].trim());
+    });
+  }
+
+  // AI Temperature Slider live badge
+  const tempSlider = document.getElementById('tempSlider');
+  const tempValueBadge = document.getElementById('tempValueBadge');
+  if (tempSlider && tempValueBadge) {
+    tempSlider.addEventListener('input', (e) => {
+      const v = parseFloat(e.target.value).toFixed(2);
+      let desc = 'Deterministic';
+      if (v >= 0.35 && v <= 0.55) desc = 'Balanced';
+      if (v > 0.55) desc = 'Creative';
+      tempValueBadge.textContent = `${v} (${desc})`;
+    });
+  }
+
+  // Model selection radio simulation
+  const modelChoices = document.querySelectorAll('.model-choice');
+  modelChoices.forEach((card) => {
+    card.addEventListener('click', () => {
+      modelChoices.forEach(c => {
+        c.classList.remove('bg-surface-container-lowest', 'shadow-md');
+        c.classList.add('bg-surface-container');
+        const icon = c.querySelector('.material-symbols-outlined:last-of-type');
+        if (icon) {
+          icon.textContent = 'radio_button_unchecked';
+          icon.classList.remove('text-primary');
+          icon.classList.add('text-outline');
+        }
+      });
+      card.classList.remove('bg-surface-container');
+      card.classList.add('bg-surface-container-lowest', 'shadow-md');
+      const icon = card.querySelector('.material-symbols-outlined:last-of-type');
+      if (icon) {
+        icon.textContent = 'radio_button_checked';
+        icon.classList.remove('text-outline');
+        icon.classList.add('text-primary');
+      }
+      const modelTitle = card.querySelector('h3').textContent;
+      showToast(`Default AI Engine switched to ${modelTitle}`);
+    });
+  });
+
+  // Toggle API Key visibility
+  const apiKeyInput = document.getElementById('apiKeyInput');
+  const toggleApiKey = document.getElementById('toggleApiKey');
+  if (apiKeyInput && toggleApiKey) {
+    toggleApiKey.addEventListener('click', () => {
+      if (apiKeyInput.type === 'password') {
+        apiKeyInput.type = 'text';
+        toggleApiKey.innerHTML = '<span class="material-symbols-outlined text-base">visibility_off</span>';
+      } else {
+        apiKeyInput.type = 'password';
+        toggleApiKey.innerHTML = '<span class="material-symbols-outlined text-base">visibility</span>';
+      }
+    });
+  }
+
+  // Delete modal actions
+  const openDeleteModal = document.getElementById('openDeleteModal');
+  const deleteModal = document.getElementById('deleteModal');
+  const closeDeleteModal = document.getElementById('closeDeleteModal');
+  const confirmEmailInput = document.getElementById('confirmEmailInput');
+  const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+  if (openDeleteModal && deleteModal) {
+    openDeleteModal.addEventListener('click', () => {
+      deleteModal.classList.remove('hidden');
+    });
+    closeDeleteModal.addEventListener('click', () => {
+      deleteModal.classList.add('hidden');
+      confirmEmailInput.value = '';
+      confirmDeleteBtn.disabled = true;
+      confirmDeleteBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    });
+    confirmEmailInput.addEventListener('input', (e) => {
+      if (e.target.value.trim().toLowerCase() === 'alex@dev.io') {
+        confirmDeleteBtn.disabled = false;
+        confirmDeleteBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      } else {
+        confirmDeleteBtn.disabled = true;
+        confirmDeleteBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    });
+    confirmDeleteBtn.addEventListener('click', () => {
+      deleteModal.classList.add('hidden');
+      showToast('Purge sequence initiated. Redirecting...');
+    });
+  }
+
+  // Save All Button Toast trigger
+  const saveAllBtn = document.getElementById('saveAllBtn');
+  if (saveAllBtn) {
+    saveAllBtn.addEventListener('click', () => {
+      showToast('All preferences successfully written to workspace configuration.');
+    });
+  }
+
+  // Toast Helper
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    if (toast && toastMsg) {
+      toastMsg.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+  }
+
+  // Navigation scroll tracking active state
+  const navItems = document.querySelectorAll('.settings-nav-item');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(n => {
+        n.classList.remove('bg-surface-container-high', 'text-primary', 'shadow-sm');
+        n.classList.add('text-on-surface-variant');
+      });
+      item.classList.add('bg-surface-container-high', 'text-primary', 'shadow-sm');
+      item.classList.remove('text-on-surface-variant');
+    });
+  });
+</script></main></div></body></html>
