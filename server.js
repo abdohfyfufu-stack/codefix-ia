@@ -4,16 +4,16 @@ const cors = require("cors");
 
 const app = express();
 
+
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 
+const path = require("path");
+
 app.get("/", (req, res) => {
-  res.json({
-    name: "CodeFix AI",
-    status: "online",
-    message: "CodeFix AI backend is running"
-  });
+  res.sendFile(path.join(__dirname, "codefix_ai_home_editor.html"));
 });
+
 
 app.post("/api/fix", async (req, res) => {
   try {
