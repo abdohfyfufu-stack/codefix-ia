@@ -10,6 +10,8 @@ app.use(express.json({ limit: "1mb" }));
 
 const path = require("path");
 
+app.use(express.static(__dirname));
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "codefix_ai_home_editor.html"));
 });
