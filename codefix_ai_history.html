@@ -67,11 +67,14 @@
 <span class="material-symbols-outlined text-outline text-base">code</span>
 <select class="bg-transparent font-code-sm text-code-sm text-on-surface focus:outline-none cursor-pointer pr-space-xs w-full" id="lang-filter">
 <option class="bg-surface-container" selected="" value="all">All Languages</option>
-<option class="bg-surface-container" value="javascript">JavaScript (8)</option>
-<option class="bg-surface-container" value="typescript">TypeScript (9)</option>
-<option class="bg-surface-container" value="python">Python (5)</option>
-<option class="bg-surface-container" value="css">CSS (2)</option>
-<option class="bg-surface-container" value="java">Java (4)</option>
+<option class="bg-surface-container" value="javascript">JavaScript</option>
+<option class="bg-surface-container" value="typescript">TypeScript</option>
+<option class="bg-surface-container" value="python">Python</option>
+<option class="bg-surface-container" value="go">Go</option>
+<option class="bg-surface-container" value="rust">Rust</option>
+<option class="bg-surface-container" value="java">Java</option>
+<option class="bg-surface-container" value="html">HTML</option>
+<option class="bg-surface-container" value="css">CSS</option>
 </select>
 </div>
 <div class="flex items-center bg-surface-container rounded-lg px-space-sm py-1.5 gap-1.5 w-full sm:w-auto">
@@ -80,7 +83,7 @@
 <option class="bg-surface-container" selected="" value="30d">Last 30 Days</option>
 <option class="bg-surface-container" value="7d">Last 7 Days</option>
 <option class="bg-surface-container" value="24h">Past 24 Hours</option>
-<option class="bg-surface-container" value="custom">Custom Range...</option>
+<option class="bg-surface-container" value="all">Any Time</option>
 </select>
 </div>
 <button class="h-9 w-9 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Export Audit Log CSV" type="button" data-unavailable="This action is not implemented in this build.">
@@ -112,7 +115,7 @@
 </div>
 </div>
 <!-- Timeline Section -->
-<div class="flex flex-col gap-space-lg" id="activity-timeline">
+<div class="flex flex-col gap-space-lg" hidden id="activity-timeline">
 <!-- Chronological Group: TODAY -->
 <div class="flex flex-col gap-space-sm timeline-group" data-group="today">
 <div class="flex items-center gap-space-sm">
@@ -460,6 +463,138 @@
   });
 </script></main></div><script>
 (() => {
+  const timeline = document.getElementById('activity-timeline');
+  if (!timeline) return;
+  timeline.replaceChildren();
+  document.querySelectorAll('[data-unavailable]').forEach(control => control.removeAttribute('data-unavailable'));
+  document.querySelectorAll('#activity-timeline ~ .mt-space-lg, #activity-timeline ~ .mt-space-xl').forEach(el => el.remove());
+  const search = document.getElementById('history-search');
+  const language = document.getElementById('lang-filter');
+  const date = document.getElementById('date-filter');
+  const filters = { category: 'all' };
+  let entries = [];
+  const updateCounts = () => {
+    document.querySelectorAll('#filter-pill-container .filter-pill').forEach(button => {
+      const category = button.dataset.filter;
+      const count = entries.filter(entry => category === 'all' || entry.task === category || (category === 'explanation' && entry.task === 'explain')).length;
+      const badge = button.querySelector('span:last-child');
+      if (badge) badge.textContent = count;
+    });
+  };
+  function render() {
+    timeline.hidden = false;
+    const query = search?.value.trim().toLowerCase() || '';
+    const selectedLanguage = language?.value || 'all';
+    const cutoff = date?.value === '24h' ? Date.now() - 86400000 : date?.value === '7d' ? Date.now() - 604800000 : date?.value === '30d' ? Date.now() - 2592000000 : 0;
+    const filtered = entries.filter(entry =>
+      (filters.category === 'all' || entry.task === filters.category || (filters.category === 'explanation' && entry.task === 'explain')) &&
+      (selectedLanguage === 'all' || entry.language.toLowerCase().includes(selectedLanguage)) &&
+      entry.createdAt && new Date(entry.createdAt).getTime() >= cutoff &&
+      (!query || `${entry.task} ${entry.language} ${entry.input} ${entry.output}`.toLowerCase().includes(query))
+    );
+    timeline.replaceChildren();
+    if (!filtered.length) {
+      const empty = document.createElement('p');
+      empty.className = 'rounded-xl bg-surface-container-low p-6 text-on-surface-variant';
+      empty.textContent = entries.length ? 'No history entries match these filters.' : 'No AI sessions yet. Run a real AI task from Home to create history.';
+      timeline.appendChild(empty);
+      return;
+    }
+    filtered.forEach(entry => {
+      const card = document.createElement('article');
+      card.className = 'rounded-xl bg-surface-container-low p-space-md flex flex-col gap-space-sm';
+      const title = document.createElement('h2');
+      title.className = 'font-headline-sm text-on-surface font-semibold';
+      title.textContent = `${entry.task} · ${entry.language}`;
+      const timestamp = document.createElement('p');
+      timestamp.className = 'font-label-code text-label-code text-outline';
+      timestamp.textContent = new Date(entry.createdAt).toLocaleString();
+      const details = document.createElement('details');
+      details.className = 'rounded-lg bg-surface-container p-space-sm';
+      const summary = document.createElement('summary');
+      summary.className = 'cursor-pointer text-primary';
+      summary.textContent = 'View actual input and result';
+      const before = document.createElement('pre');
+      before.className = 'whitespace-pre-wrap overflow-auto text-sm mt-2';
+      before.textContent = `Input:\n${entry.input}\n\nResult:\n${entry.output}`;
+      details.append(summary, before);
+      const actions = document.createElement('div');
+      actions.className = 'flex flex-wrap gap-2';
+      if (entry.task === 'fix' || entry.task === 'complete' || entry.task === 'refactor' || entry.task === 'comments') {
+        const restore = document.createElement('a');
+        restore.className = 'rounded-lg bg-primary-container px-3 py-2 text-on-primary-container';
+        restore.href = `codefix_ai_home_editor.html?history=${encodeURIComponent(entry.id)}${entry.projectId ? `&project=${encodeURIComponent(entry.projectId)}` : ''}`;
+        restore.textContent = 'Restore input';
+        actions.appendChild(restore);
+        const reapply = document.createElement('button');
+        reapply.type = 'button';
+        reapply.className = 'rounded-lg bg-surface-container-high px-3 py-2 text-on-surface';
+        reapply.textContent = 'Reapply result';
+        reapply.addEventListener('click', () => {
+          location.href = `codefix_ai_home_editor.html?history=${encodeURIComponent(entry.id)}&apply=1${entry.projectId ? `&project=${encodeURIComponent(entry.projectId)}` : ''}`;
+        });
+        actions.appendChild(reapply);
+      }
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'rounded-lg bg-surface-container-high px-3 py-2 text-error';
+      remove.textContent = 'Delete';
+      remove.addEventListener('click', async () => {
+        const response = await fetch(`/api/history/${encodeURIComponent(entry.id)}`, { method: 'DELETE' });
+        if (!response.ok) return alert('Unable to delete this history entry.');
+        await load();
+      });
+      actions.appendChild(remove);
+      card.append(title, timestamp, details, actions);
+      timeline.appendChild(card);
+    });
+  }
+  async function load() {
+    try {
+      const response = await fetch('/api/history');
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to load history.');
+      entries = data.history;
+      updateCounts();
+      render();
+    } catch (error) {
+      const message = document.createElement('p');
+      message.className = 'text-error';
+      message.textContent = error.message;
+      timeline.replaceChildren(message);
+      timeline.hidden = false;
+    }
+  }
+  search?.addEventListener('input', render);
+  language?.addEventListener('change', render);
+  date?.addEventListener('change', render);
+  document.querySelectorAll('#filter-pill-container .filter-pill').forEach(button => {
+    button.addEventListener('click', () => {
+      filters.category = button.dataset.filter;
+      render();
+    });
+  });
+  document.getElementById('reset-filters-btn')?.addEventListener('click', () => {
+    if (search) search.value = '';
+    if (language) language.value = 'all';
+    if (date) date.value = '30d';
+    filters.category = 'all';
+    render();
+  });
+  const exportButton = document.querySelector('button[title="Export Audit Log CSV"]');
+  exportButton?.addEventListener('click', () => {
+    const rows = [['task', 'language', 'createdAt', 'input', 'result'], ...entries.map(entry => [entry.task, entry.language, entry.createdAt, entry.input, entry.output])];
+    const csv = rows.map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(',')).join('\n');
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    link.download = 'codefix-history.csv';
+    link.click();
+    URL.revokeObjectURL(link.href);
+  });
+  load();
+})();
+</script><script>
+(() => {
   const notice = document.createElement('div');
   notice.setAttribute('role', 'status');
   notice.setAttribute('aria-live', 'polite');
@@ -474,7 +609,7 @@
   };
   document.addEventListener('click', (event) => {
     if (!(event.target instanceof Element)) return;
-    const control = event.target.closest('[data-unavailable], a[href="#"]');
+    const control = event.target.closest('[data-unavailable]');
     if (!control) return;
     event.preventDefault();
     event.stopImmediatePropagation();

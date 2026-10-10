@@ -74,7 +74,7 @@
 <span class="material-symbols-outlined text-primary text-xl">badge</span>
 <h2 class="font-headline-sm text-headline-sm text-on-surface">Account &amp; Profile</h2>
 </div>
-<span class="font-label-code text-label-code text-outline uppercase">UUID: 8f92-b4c1</span>
+<span class="font-label-code text-label-code text-outline uppercase">Guest session</span>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-center">
 <!-- Profile Avatar Change -->
@@ -87,8 +87,8 @@
 </div>
 </div>
 <div class="text-center">
-<p class="font-body-md text-body-md font-semibold text-on-surface">Alex Rivera</p>
-<p class="font-label-code text-label-code text-outline">alex@dev.io</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">Guest session</p>
+<p class="font-label-code text-label-code text-outline">No email configured</p>
 </div>
 <button class="font-label-ui text-label-ui text-primary hover:text-on-surface transition-colors" type="button" data-unavailable="This action is not implemented in this build.">Upload Custom PNG/WebP</button>
 </div>
@@ -97,11 +97,11 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div class="flex flex-col gap-1">
 <label class="font-label-code text-label-code text-outline">Full Display Name</label>
-<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" type="text" value="Alex Rivera"/>
+<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" type="text" placeholder="Unavailable for guest sessions"/>
 </div>
 <div class="flex flex-col gap-1">
 <label class="font-label-code text-label-code text-outline">Primary Contact Email</label>
-<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" type="email" value="alex@dev.io"/>
+<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" type="email" placeholder="Unavailable for guest sessions"/>
 </div>
 </div>
 <!-- GitHub Connected Banner -->
@@ -113,9 +113,9 @@
 <div class="flex flex-col">
 <div class="flex items-center gap-1.5">
 <span class="font-body-md text-body-md font-semibold text-on-surface">GitHub Integration</span>
-<span class="font-label-code text-label-code text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded">Connected</span>
+<span class="font-label-code text-label-code text-outline bg-surface-container-high px-1.5 py-0.5 rounded">Not connected</span>
 </div>
-<span class="font-label-code text-label-code text-outline">Authorized as <span class="text-on-surface">@arivera</span> (Sync active)</span>
+<span class="font-label-code text-label-code text-outline">GitHub OAuth is not configured</span>
 </div>
 </div>
 <button class="px-space-sm py-1 rounded font-label-ui text-label-ui text-outline hover:text-on-surface bg-surface-container-high hover:bg-surface-variant transition-colors" type="button" data-unavailable="This action is not implemented in this build.">Disconnect</button>
@@ -166,7 +166,7 @@
 <span class="font-label-code text-label-code text-outline">Engineered for long-duration flow states &amp; low eye strain.</span>
 </div>
 <!-- Light Theme Option -->
-<div class="relative bg-surface-container p-space-md rounded-xl cursor-pointer hover:bg-surface-variant transition-all flex flex-col gap-space-sm opacity-60 hover:opacity-100">
+<div class="relative bg-surface-container p-space-md rounded-xl cursor-pointer hover:bg-surface-variant transition-all flex flex-col gap-space-sm opacity-60 hover:opacity-100" data-unavailable="Light theme is not implemented in this build.">
 <div class="flex items-center justify-between">
 <span class="font-body-md text-body-md font-semibold text-on-surface flex items-center gap-2">
 <span class="material-symbols-outlined text-outline text-base">light_mode</span>
@@ -224,7 +224,7 @@
 <div class="grid grid-cols-2 gap-space-sm pt-1">
 <div class="flex flex-col gap-1">
 <span class="font-label-code text-label-code text-on-surface-variant">Font Size</span>
-<select class="bg-surface-container-lowest text-on-surface font-code-md text-code-md rounded-lg px-space-sm py-1.5 focus:outline-none">
+<select class="bg-surface-container-lowest text-on-surface font-code-md text-code-md rounded-lg px-space-sm py-1.5 focus:outline-none" data-unavailable="Editor typography preferences are not implemented in this build.">
 <option value="12">12px (Dense)</option>
 <option selected="" value="13">13px (Default)</option>
 <option value="14">14px (Spacious)</option>
@@ -233,7 +233,7 @@
 </div>
 <div class="flex flex-col gap-1">
 <span class="font-label-code text-label-code text-on-surface-variant">Line Height</span>
-<select class="bg-surface-container-lowest text-on-surface font-code-md text-code-md rounded-lg px-space-sm py-1.5 focus:outline-none">
+<select class="bg-surface-container-lowest text-on-surface font-code-md text-code-md rounded-lg px-space-sm py-1.5 focus:outline-none" data-unavailable="Editor typography preferences are not implemented in this build.">
 <option value="1.4">1.4x (Snug)</option>
 <option selected="" value="1.6">1.6x (Optimal)</option>
 <option value="1.8">1.8x (Relaxed)</option>
@@ -260,7 +260,7 @@
 <option value="fr-FR">Français (FR) — French Metropole</option>
 <option value="ar-SA">العربية (Arabic) — RTL Layout Engine Flagged</option>
 </select>
-<span class="font-label-code text-label-code text-outline">Changes will reload interface components and syntax explanation strings.</span>
+<span class="font-label-code text-label-code text-outline">The preference and preview text are saved; full interface translation is not implemented.</span>
 </div>
 <!-- Preview Card for Bi-directional / RTL Preview -->
 <div class="bg-surface-container p-space-md rounded-xl flex flex-col gap-space-xs">
@@ -268,7 +268,7 @@
 <span class="font-label-code text-label-code text-primary uppercase">Localization Preview</span>
 <span class="material-symbols-outlined text-outline text-base">flip</span>
 </div>
-<p class="font-body-md text-body-md text-on-surface" id="localeSampleText">"AI diagnostic inspection complete: 0 warnings, 2 regressions patched."</p>
+<p class="font-body-md text-body-md text-on-surface" id="localeSampleText">Preview text changes with the selected interface locale.</p>
 <div class="flex items-center gap-space-sm text-outline font-label-code text-label-code pt-1">
 <span>Text Direction: <strong class="text-on-surface" id="localeDir">LTR</strong></span>
 <span>•</span>
@@ -295,8 +295,8 @@
 <span class="font-label-code text-label-code text-primary bg-primary-container/20 px-1.5 py-0.5 rounded font-semibold">Recommended</span>
 <span class="material-symbols-outlined text-primary text-base">radio_button_checked</span>
 </div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Claude 3.5 Sonnet</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Superior architectural code reasoning, edge-case vulnerability detection, and refactoring clarity.</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Gemini 2.5 Flash</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The configured server-side model used for real code tasks.</p>
 </div>
 <div class="pt-space-md flex items-center justify-between font-label-code text-label-code text-outline">
 <span>Latency: ~1.2s</span>
@@ -310,8 +310,8 @@
 <span class="font-label-code text-label-code text-outline bg-surface-container-high px-1.5 py-0.5 rounded">Fast Multi-modal</span>
 <span class="material-symbols-outlined text-outline text-base">radio_button_unchecked</span>
 </div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">GPT-4o</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">High-throughput token emission ideal for unit test generation and boilerplate synthesis.</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Unavailable provider</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">No GPT provider is configured in this build.</p>
 </div>
 <div class="pt-space-md flex items-center justify-between font-label-code text-label-code text-outline">
 <span>Latency: ~0.9s</span>
@@ -325,8 +325,8 @@
 <span class="font-label-code text-label-code text-tertiary bg-tertiary-container/20 px-1.5 py-0.5 rounded">Proprietary</span>
 <span class="material-symbols-outlined text-outline text-base">radio_button_unchecked</span>
 </div>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">CodeFix v2.4</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Trained strictly on git commit history diffs, zero hallucination on package manager imports.</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Unavailable provider</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">No custom CodeFix model is configured.</p>
 </div>
 <div class="pt-space-md flex items-center justify-between font-label-code text-label-code text-outline">
 <span>Latency: ~0.4s</span>
@@ -341,10 +341,10 @@
 <label class="font-label-code text-label-code text-outline uppercase">Autonomous Fix Temperature</label>
 <p class="font-body-sm text-body-sm text-on-surface-variant">Balances mathematical determinism against exploratory refactoring patterns.</p>
 </div>
-<span class="font-label-code text-label-code text-on-primary bg-primary-container px-2 py-0.5 rounded font-semibold self-start sm:self-auto" id="tempValueBadge">0.2 (Deterministic)</span>
+<span class="font-label-code text-label-code text-on-primary bg-primary-container px-2 py-0.5 rounded font-semibold self-start sm:self-auto" id="tempValueBadge">0.1 (Deterministic)</span>
 </div>
 <div class="flex flex-col gap-2">
-<input class="w-full accent-primary-container cursor-pointer bg-surface-container-highest rounded-lg h-2" id="tempSlider" max="0.7" min="0.1" step="0.05" type="range" value="0.2"/>
+<input class="w-full accent-primary-container cursor-pointer bg-surface-container-highest rounded-lg h-2" id="tempSlider" max="0.7" min="0.1" step="0.05" type="range" value="0.1"/>
 <div class="flex justify-between font-label-code text-label-code text-outline">
 <span>0.1 (Strict Deterministic / Bugfix)</span>
 <span>0.4 (Balanced Refactor)</span>
@@ -361,7 +361,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
 <input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" placeholder="https://ollama.internal.net:11434/v1" type="text"/>
 <div class="relative flex items-center">
-<input class="w-full bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner pr-10" id="apiKeyInput" type="password" value="sk-live-49102-bf89e41982b1c8f10a"/>
+<input class="w-full bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-inner pr-10" id="apiKeyInput" type="password" value="" placeholder="Configured securely on the server"/>
 <button class="absolute right-2 text-outline hover:text-on-surface" id="toggleApiKey" type="button">
 <span class="material-symbols-outlined text-base">visibility</span>
 </button>
@@ -419,7 +419,7 @@
 <span class="material-symbols-outlined text-primary text-xl">notifications_active</span>
 <h2 class="font-headline-sm text-headline-sm text-on-surface">Notifications &amp; Telemetry</h2>
 </div>
-<span class="font-label-code text-label-code text-outline">Real-time alerts</span>
+<span class="font-label-code text-label-code text-outline">Saved preferences only; delivery is not configured</span>
 </div>
 <div class="flex flex-col gap-space-sm">
 <!-- Toggle 1: Email Summaries -->
@@ -428,7 +428,7 @@
 <span class="material-symbols-outlined text-outline text-xl">mark_email_read</span>
 <div class="flex flex-col">
 <span class="font-body-md text-body-md font-semibold text-on-surface">Weekly Diagnostic Summaries</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Receive automated audit logs of fixed memory leaks and sanitized dependency trees.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Preference only. Email delivery is not configured.</span>
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
@@ -442,7 +442,7 @@
 <span class="material-symbols-outlined text-outline text-xl">volume_up</span>
 <div class="flex flex-col">
 <span class="font-body-md text-body-md font-semibold text-on-surface">Sound Effects on Patch Completion</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Subtle synthesized auditory cue when automated fix pipelines compile cleanly.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Preference only. Audio notifications are not implemented.</span>
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
@@ -456,7 +456,7 @@
 <span class="material-symbols-outlined text-outline text-xl">desktop_windows</span>
 <div class="flex flex-col">
 <span class="font-body-md text-body-md font-semibold text-on-surface">Desktop Push Notifications</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Notify when long-running project-wide vulnerability scans finish in the background.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Preference only. Background push notifications are not implemented.</span>
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
@@ -473,23 +473,23 @@
 <span class="material-symbols-outlined text-primary text-xl">credit_card</span>
 <h2 class="font-headline-sm text-headline-sm text-on-surface">Plan &amp; Billing Quota</h2>
 </div>
-<span class="font-label-code text-label-code text-outline">Tier: Hobby</span>
+<span class="font-label-code text-label-code text-outline">Guest session</span>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg">
 <!-- Plan Status Card -->
 <div class="md:col-span-7 bg-surface-container p-space-md rounded-xl flex flex-col justify-between gap-space-md">
 <div class="flex flex-col gap-space-xs">
 <div class="flex items-center justify-between">
-<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Free Developer Tier</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">No subscription configured</span>
 <span class="font-label-code text-label-code bg-tertiary-container/30 text-tertiary px-2 py-0.5 rounded font-semibold">$0 / mo</span>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Includes standard parsing speeds, Claude 3.5 fallback, and up to 10 automated remediations per 24 hours.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Payments and subscription management are not configured. AI availability depends on the server-side Gemini API key.</p>
 </div>
 <!-- Usage Progress Visual -->
 <div class="flex flex-col gap-1.5">
 <div class="flex justify-between items-center font-label-code text-label-code">
-<span class="text-outline">Daily Autonomous Fixes</span>
-<span class="text-on-surface font-semibold">3 / 10 Used (7 Remaining)</span>
+<span class="text-outline">AI provider usage</span>
+<span class="text-on-surface font-semibold">Managed by Google Gemini</span>
 </div>
 <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
 <div class="h-full bg-gradient-to-r from-primary-container to-secondary rounded-full" style="width: 30%"></div>
@@ -518,7 +518,7 @@
 <span class="material-symbols-outlined text-primary text-xl">shield</span>
 <h2 class="font-headline-sm text-headline-sm text-on-surface">Security &amp; Authentication</h2>
 </div>
-<span class="font-label-code text-label-code text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded">Security Score: A+</span>
+<span class="font-label-code text-label-code text-outline bg-surface-container px-2 py-0.5 rounded">Authentication not configured</span>
 </div>
 <!-- Two-Factor Authentication Info -->
 <div class="p-space-md bg-surface-container rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
@@ -529,9 +529,9 @@
 <div class="flex flex-col">
 <div class="flex items-center gap-2">
 <span class="font-body-md text-body-md font-semibold text-on-surface">Two-Factor Authentication (2FA)</span>
-<span class="font-label-code text-label-code text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded">Enabled</span>
+<span class="font-label-code text-label-code text-outline bg-surface-container-high px-1.5 py-0.2 rounded">Unavailable</span>
 </div>
-<span class="font-body-sm text-body-sm text-on-surface-variant">FIDO2 / WebAuthn Hardware keys &amp; TOTP Authenticator active.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Two-factor authentication requires an account provider.</span>
 </div>
 </div>
 <button class="px-space-md py-1.5 rounded-lg font-label-ui text-label-ui text-on-surface bg-surface-container-high hover:bg-surface-variant transition-colors self-start sm:self-auto" type="button" data-unavailable="This action is not implemented in this build.">Manage 2FA Keys</button>
@@ -544,12 +544,12 @@
 </div>
 <div class="flex flex-col">
 <span class="font-body-md text-body-md font-semibold text-error">Delete Account &amp; Purge Repositories</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Permanently delete Alex Rivera's profile, revoke cloud GitHub tokens, and erase indexed AST semantic caches. This action is irreversible.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Account deletion is unavailable because this build uses unauthenticated guest sessions.</p>
 </div>
 </div>
-<button class="px-space-md py-2 rounded-lg font-label-ui text-label-ui text-on-error bg-error hover:brightness-110 active:scale-95 shadow-md flex-shrink-0 transition-all self-start sm:self-auto flex items-center gap-1.5" id="openDeleteModal" type="button">
+<button class="px-space-md py-2 rounded-lg font-label-ui text-label-ui text-on-error bg-error hover:brightness-110 active:scale-95 shadow-md flex-shrink-0 transition-all self-start sm:self-auto flex items-center gap-1.5" id="openDeleteModal" type="button" data-unavailable="Account deletion requires an authenticated account provider.">
 <span class="material-symbols-outlined text-base">delete_forever</span>
-<span>Purge Account</span>
+<span>Account deletion unavailable</span>
 </button>
 </div>
 </section>
@@ -564,11 +564,11 @@
 <h3 class="font-headline-sm text-headline-sm font-semibold">Confirm Account Purge</h3>
 </div>
 <p class="font-body-md text-body-md text-on-surface-variant">
-        Are you absolutely certain? This will immediately cancel your subscriptions, decouple your GitHub repository permissions, and purge your indexed codebases permanently.
+        Account removal is not available for guest sessions.
       </p>
 <div class="flex flex-col gap-1">
-<label class="font-label-code text-label-code text-outline">Type <strong class="text-on-surface">alex@dev.io</strong> to confirm:</label>
-<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-error shadow-inner" id="confirmEmailInput" placeholder="alex@dev.io" type="text"/>
+<label class="font-label-code text-label-code text-outline">Account deletion requires an authentication provider.</label>
+<input class="bg-surface-container-lowest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface focus:outline-none focus:ring-1 focus:ring-error shadow-inner" id="confirmEmailInput" placeholder="Unavailable" type="text" disabled/>
 </div>
 <div class="flex items-center justify-end gap-space-sm pt-space-xs">
 <button class="px-space-md py-2 rounded-lg font-label-ui text-label-ui text-outline hover:text-on-surface bg-surface-container hover:bg-surface-variant transition-colors" id="closeDeleteModal" type="button">Cancel</button>
@@ -595,15 +595,15 @@
     localeSelect.addEventListener('change', (e) => {
       const val = e.target.value;
       if (val === 'ar-SA') {
-        localeSampleText.textContent = "اكتمل الفحص التشخيصي للذكاء الاصطناعي: 0 تحذيرات، وتم تصحيح انحدارين.";
+        localeSampleText.textContent = "معاينة لنص الواجهة باللغة العربية.";
         localeSampleText.setAttribute('dir', 'rtl');
         localeDir.textContent = 'RTL (Arabic)';
       } else if (val === 'fr-FR') {
-        localeSampleText.textContent = "Inspection diagnostique de l'IA terminée : 0 avertissement, 2 régressions corrigées.";
+        localeSampleText.textContent = "Aperçu du texte de l'interface en français.";
         localeSampleText.removeAttribute('dir');
         localeDir.textContent = 'LTR';
       } else {
-        localeSampleText.textContent = '"AI diagnostic inspection complete: 0 warnings, 2 regressions patched."';
+        localeSampleText.textContent = 'Preview text in English.';
         localeSampleText.removeAttribute('dir');
         localeDir.textContent = 'LTR';
       }
@@ -725,6 +725,143 @@
   });
 </script></main></div><script>
 (() => {
+  const saveButton = document.getElementById('saveAllBtn');
+  const locale = document.getElementById('localeSelect');
+  const temperature = document.getElementById('tempSlider');
+  const language = document.querySelector('#language-defaults select');
+  const notifications = Array.from(document.querySelectorAll('#notifications input[type="checkbox"]'));
+  document.querySelectorAll('[data-unavailable]').forEach(control => {
+    if (control === saveButton) control.removeAttribute('data-unavailable');
+  });
+  const modelChoices = document.querySelectorAll('.model-choice');
+  modelChoices.forEach((card, index) => {
+    card.removeAttribute('data-unavailable');
+    if (index > 0) {
+      card.classList.add('opacity-50');
+      card.setAttribute('aria-disabled', 'true');
+      card.addEventListener('click', event => {
+        event.stopPropagation();
+        showToast('Only the configured Gemini 2.5 Flash provider is available.');
+      });
+    }
+  });
+  document.querySelectorAll('.model-choice').forEach((card, index) => {
+    if (index > 0) card.classList.remove('cursor-pointer');
+  });
+  document.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) return;
+    const card = event.target.closest('.model-choice');
+    if (card) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      showToast(Array.from(modelChoices).indexOf(card) === 0
+        ? 'Gemini 2.5 Flash is already the configured engine.'
+        : 'Only Gemini 2.5 Flash is configured.');
+    }
+  }, true);
+  document.querySelectorAll('#account input').forEach(input => {
+    input.value = '';
+    input.placeholder = 'Unavailable for guest sessions';
+    input.disabled = true;
+  });
+  const accountName = document.querySelector('#account .text-center p');
+  if (accountName) accountName.textContent = 'Guest session';
+  const accountEmail = document.querySelector('#account .text-center p + p');
+  if (accountEmail) accountEmail.textContent = 'No email configured';
+  document.querySelectorAll('#account .font-label-code').forEach(label => {
+    if (label.textContent.includes('Connected') || label.textContent.includes('Authorized as')) {
+      label.textContent = 'Not connected';
+      label.classList.remove('text-emerald-400');
+    }
+  });
+  document.querySelectorAll('#apiKeyInput, #toggleApiKey').forEach(control => {
+    control.removeAttribute('data-unavailable');
+  });
+  function readSettings() {
+    return {
+      locale: locale?.value || 'en-US',
+      temperature: Number(temperature?.value || 0.2),
+      language: language?.value || 'typescript',
+      notifications: notifications.map(input => input.checked)
+    };
+  }
+  async function loadSettings() {
+    try {
+      const response = await fetch('/api/settings');
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to load settings.');
+      const settings = data.settings;
+      if (locale && settings.locale) locale.value = settings.locale;
+      if (temperature && Number.isFinite(settings.temperature)) temperature.value = String(settings.temperature);
+      if (language && settings.language) language.value = settings.language;
+      if (Array.isArray(settings.notifications)) {
+        notifications.forEach((input, index) => { input.checked = Boolean(settings.notifications[index]); });
+      }
+      locale?.dispatchEvent(new Event('change'));
+      temperature?.dispatchEvent(new Event('input'));
+    } catch (error) {
+      showToast(error.message);
+    }
+  }
+  async function loadLanguageStats() {
+    const label = Array.from(document.querySelectorAll('#language-defaults span')).find(item =>
+      item.textContent.includes('Your Diagnostic History by Language')
+    );
+    const chart = label?.closest('[class*="md:col-span-5"]');
+    if (!chart) return;
+    try {
+      const response = await fetch('/api/history');
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to load language statistics.');
+      const counts = new Map();
+      data.history.forEach(entry => counts.set(entry.language, (counts.get(entry.language) || 0) + 1));
+      const total = data.history.length;
+      chart.replaceChildren();
+      const heading = document.createElement('span');
+      heading.className = 'font-label-code text-label-code text-on-surface-variant';
+      heading.textContent = 'Actual AI history by language';
+      chart.appendChild(heading);
+      if (!total) {
+        const empty = document.createElement('p');
+        empty.className = 'font-body-sm text-body-sm text-outline';
+        empty.textContent = 'No AI sessions recorded yet.';
+        chart.appendChild(empty);
+      } else {
+        for (const [name, count] of counts) {
+          const line = document.createElement('p');
+          line.className = 'font-label-code text-label-code text-on-surface-variant';
+          line.textContent = `${name}: ${count} session${count === 1 ? '' : 's'} (${Math.round(count / total * 100)}%)`;
+          chart.appendChild(line);
+        }
+      }
+    } catch (error) {
+      showToast(error.message);
+    }
+  }
+  saveButton?.addEventListener('click', async event => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    saveButton.disabled = true;
+    try {
+      const response = await fetch('/api/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(readSettings())
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to save settings.');
+      showToast('Settings saved on this server.');
+    } catch (error) {
+      showToast(error.message);
+    } finally {
+      saveButton.disabled = false;
+    }
+  }, true);
+  loadSettings();
+  loadLanguageStats();
+})();
+</script><script>
+(() => {
   const notice = document.createElement('div');
   notice.setAttribute('role', 'status');
   notice.setAttribute('aria-live', 'polite');
@@ -739,7 +876,7 @@
   };
   document.addEventListener('click', (event) => {
     if (!(event.target instanceof Element)) return;
-    const control = event.target.closest('[data-unavailable], a[href="#"]');
+    const control = event.target.closest('[data-unavailable]');
     if (!control) return;
     event.preventDefault();
     event.stopImmediatePropagation();

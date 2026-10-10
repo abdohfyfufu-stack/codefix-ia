@@ -99,7 +99,7 @@
 <div class="h-6 leading-6 text-surface-container-high">14</div>
 </div>
 <!-- Syntax Highlighting Canvas -->
-<div aria-label="JavaScript code editor" class="py-space-md px-space-md flex-1 text-on-surface whitespace-pre leading-6 relative focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-container" contenteditable="true" id="code-content-wrapper" role="textbox" spellcheck="false" tabindex="0">
+<div aria-label="JavaScript code editor" class="py-space-md px-space-md flex-1 text-on-surface whitespace-pre leading-6 relative focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-container" contenteditable="true" hidden id="code-content-wrapper" role="textbox" spellcheck="false" tabindex="0">
 <!-- Ambient Glow for Error Region -->
 <div class="absolute left-0 right-0 top-[38px] h-6 bg-error-container/20 pointer-events-none"></div>
 <!-- Line 1 -->
@@ -188,14 +188,14 @@
 </div>
 <div class="flex items-center gap-1 pb-2">
 <span class="font-label-code text-label-code text-tertiary bg-tertiary-container/20 px-2 py-0.5 rounded">
-            99.4% confidence
+            Ready for input
           </span>
 </div>
 </div>
 <!-- Tab Panels Container -->
 <div class="p-space-md flex flex-col gap-space-md min-h-[460px]">
 <!-- ================= TAB 1: AI ANALYSIS ================= -->
-<div class="flex flex-col gap-space-md" id="tab-content-analysis">
+<div class="flex flex-col gap-space-md" hidden id="tab-content-analysis">
 <!-- Critical Error Diagnostics Card -->
 <div class="p-space-md rounded-xl bg-surface-container-high flex flex-col gap-space-sm">
 <div class="flex items-start justify-between gap-space-sm">
@@ -253,7 +253,7 @@
 <div class="flex items-center gap-space-sm mt-1">
 <button class="flex-1 py-2 px-space-md rounded-lg font-label-ui text-label-ui text-white font-medium bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:brightness-110 flex items-center justify-center gap-1.5 shadow-md transition-all" id="apply-patch-direct-btn" type="button">
 <span class="material-symbols-outlined text-base">check_circle</span>
-<span>Apply Instant Fix</span>
+<span>Apply Reviewed Result</span>
 </button>
 </div>
 </div>
@@ -263,7 +263,7 @@
 <div class="flex items-center justify-between">
 <span class="font-label-ui text-label-ui text-on-surface-variant flex items-center gap-1">
 <span class="material-symbols-outlined text-base text-tertiary">task_alt</span>
-              Verified Syntax Resolution
+              AI-generated result (review before applying)
             </span>
 <div class="flex items-center gap-1">
 <button class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-ui text-label-ui transition-colors" id="btn-copy-code" type="button">
@@ -290,7 +290,7 @@
 </div>
 <button class="w-full py-2.5 px-space-md rounded-lg font-label-ui text-label-ui text-white font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 hover:brightness-110 flex items-center justify-center gap-2 shadow-md transition-all" id="apply-to-editor-btn" type="button">
 <span class="material-symbols-outlined text-lg">check_circle</span>
-<span>Apply Fix to Editor Pane</span>
+<span>Apply AI Result to Editor Pane</span>
 </button>
 </div>
 <!-- ================= TAB 3: DIFF VIEW ================= -->
@@ -354,11 +354,11 @@
 <div class="bg-surface-container px-space-md py-space-sm flex flex-wrap items-center justify-between gap-space-xs text-outline font-label-code text-label-code">
 <div class="flex items-center gap-1.5 truncate">
 <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-<span class="text-on-surface-variant">AI Model: Claude 3.5 Sonnet &amp; CodeFix Engine v2.4</span>
+<span class="text-on-surface-variant">AI Model: Gemini 2.5 Flash (server-side configuration)</span>
 </div>
 <div class="flex items-center gap-space-md flex-shrink-0">
 <span>Speed: <strong class="text-on-surface">340ms</strong></span>
-<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary">3 / 10 Free fixes</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary">Usage limits are controlled by the server provider</span>
 </div>
 </div>
 </div>
@@ -388,6 +388,11 @@
           btn.classList.remove('text-primary', 'font-semibold');
           btn.classList.add('text-on-surface-variant', 'font-medium');
         }
+      });
+      codeContentWrapper.addEventListener('paste', event => {
+        event.preventDefault();
+        const text = event.clipboardData?.getData('text/plain');
+        if (typeof text === 'string') applyCodeToEditor(text);
       });
 
       Object.keys(tabs).forEach(k => {
@@ -426,8 +431,179 @@
     const codeContentWrapper = document.getElementById('code-content-wrapper');
     const brokenLine = document.getElementById('line-broken');
     const gutterLine2 = document.getElementById('gutter-line-2');
+    const editorLanguage = document.querySelector('.bg-surface-container-highest.text-secondary.font-label-code');
+    let selectedLanguage = 'JavaScript';
+    let selectedTask = new URLSearchParams(location.search).get('task') || 'fix';
+    let currentProject = null;
     let fixedCode = '';
     let fixResultStale = false;
+    codeContentWrapper.replaceChildren();
+    codeContentWrapper.contentEditable = 'true';
+    codeContentWrapper.setAttribute('aria-label', 'Code editor. Paste or type code to get started.');
+    codeContentWrapper.removeAttribute('hidden');
+    codeContentWrapper.dataset.placeholder = 'Paste or type your code here…';
+    const placeholderStyle = document.createElement('style');
+    placeholderStyle.textContent = '#code-content-wrapper:empty::before{content:attr(data-placeholder);color:#908fa0;pointer-events:none}';
+    document.head.appendChild(placeholderStyle);
+    const gutter = codeContentWrapper.previousElementSibling;
+    if (gutter) gutter.replaceChildren();
+    document.getElementById('gutter-line-2')?.remove();
+    document.getElementById('current-tab-name')?.replaceChildren(document.createTextNode('untitled'));
+    document.querySelectorAll('.tab-btn span.bg-error-container, #tab-content-analysis .bg-error-container, #tab-content-analysis .text-error').forEach(el => el.remove());
+    document.querySelectorAll('#tab-content-analysis, #tab-content-fixed, #tab-content-diff').forEach(panel => {
+      panel.classList.add('hidden');
+    });
+    activateTab('analysis');
+    const analysisPanel = document.getElementById('tab-content-analysis');
+    analysisPanel.hidden = false;
+    analysisPanel.classList.remove('hidden');
+    analysisPanel.replaceChildren();
+    const analysisMessage = document.createElement('p');
+    analysisMessage.className = 'text-on-surface-variant';
+    analysisMessage.textContent = 'Enter code and choose an AI action to analyze it.';
+    analysisPanel.appendChild(analysisMessage);
+    document.querySelectorAll('.tab-btn[data-tab="fixed"], .tab-btn[data-tab="diff"], #apply-patch-direct-btn, #apply-to-editor-btn, #diff-accept-btn').forEach(button => {
+      button.disabled = true;
+      button.classList.add('opacity-50');
+    });
+    document.querySelectorAll('[data-unavailable]').forEach(control => {
+      if (control.id === 'btn-paste' || control.id === 'btn-clear') control.removeAttribute('data-unavailable');
+    });
+    document.querySelectorAll('#tab-content-analysis .tab-btn, .tab-btn').forEach(button => {
+      if (button.dataset.tab) button.disabled = button.dataset.tab !== 'analysis';
+    });
+    document.querySelectorAll('.bg-surface-container-highest.text-secondary.font-label-code').forEach(el => {
+      el.textContent = selectedLanguage;
+    });
+    const activeTabName = document.getElementById('current-tab-name');
+    if (activeTabName?.parentElement) {
+      const languageSelect = document.createElement('select');
+      languageSelect.className = 'bg-surface-container-high text-on-surface font-label-code text-label-code rounded px-2 py-1';
+      languageSelect.setAttribute('aria-label', 'Code language');
+      [['javascript', 'JavaScript'], ['typescript', 'TypeScript'], ['python', 'Python'], ['go', 'Go'], ['rust', 'Rust'], ['java', 'Java'], ['html', 'HTML'], ['css', 'CSS']].forEach(([value, label]) => {
+        const option = document.createElement('option');
+        option.value = label;
+        option.textContent = label;
+        languageSelect.appendChild(option);
+      });
+      languageSelect.value = selectedLanguage;
+      languageSelect.addEventListener('change', () => { selectedLanguage = languageSelect.value; });
+      activeTabName.parentElement.appendChild(languageSelect);
+      const saveProjectButton = document.createElement('button');
+      saveProjectButton.type = 'button';
+      saveProjectButton.className = 'rounded bg-surface-container-high px-2 py-1 text-on-surface font-label-code text-label-code';
+      saveProjectButton.textContent = 'Save';
+      saveProjectButton.hidden = !new URLSearchParams(location.search).has('project');
+      saveProjectButton.addEventListener('click', async () => {
+        if (!currentProject) return showToast('Open or create a project before saving.');
+        try {
+          const response = await fetch(`/api/projects/${encodeURIComponent(currentProject.id)}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: currentProject.name, language: selectedLanguage, code: getEditorCode() })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Unable to save project.');
+          currentProject = data.project;
+          showToast('Project saved on this server.');
+        } catch (error) {
+          showToast(error.message);
+        }
+      });
+      activeTabName.parentElement.appendChild(saveProjectButton);
+    }
+    {
+      const uploadButton = Array.from(document.querySelectorAll('button')).find(button => button.title === 'Upload script');
+      if (uploadButton) {
+        uploadButton.removeAttribute('data-unavailable');
+        uploadButton.addEventListener('click', () => {
+          const picker = document.createElement('input');
+          picker.type = 'file';
+          picker.accept = '.js,.jsx,.ts,.tsx,.py,.go,.rs,.java,.html,.css,.json,.txt';
+          picker.addEventListener('change', async () => {
+            const file = picker.files?.[0];
+            if (!file) return;
+            if (file.size > 20000) return showToast('Files must be 20000 characters or smaller.');
+            applyCodeToEditor(await file.text());
+            const detectedLanguage = { js: 'JavaScript', jsx: 'JavaScript', ts: 'TypeScript', tsx: 'TypeScript', py: 'Python', go: 'Go', rs: 'Rust', java: 'Java', html: 'HTML', css: 'CSS' }[file.name.split('.').pop().toLowerCase()];
+            if (detectedLanguage) {
+              selectedLanguage = detectedLanguage;
+              const selector = document.querySelector('[aria-label="Code language"]');
+              if (selector) selector.value = selectedLanguage;
+            }
+          });
+          picker.click();
+        });
+      }
+    }
+    const quickTasks = { 'Explain Code': 'explain', 'Find Bugs': 'bugs', 'Improve Performance': 'performance', 'Add Comments': 'comments' };
+    document.querySelectorAll('#btn-fix-code').forEach(() => {});
+    Array.from(document.querySelectorAll('.bg-surface-container-low button')).forEach(button => {
+      const label = button.textContent.trim().split(/\n/).pop().trim();
+      if (quickTasks[label]) {
+        button.removeAttribute('data-unavailable');
+        button.addEventListener('click', () => runAiTask(quickTasks[label]));
+      }
+    });
+    document.getElementById('btn-clear')?.addEventListener('click', () => {
+      codeContentWrapper.replaceChildren();
+      fixedCode = '';
+      fixResultStale = false;
+    });
+    document.getElementById('btn-paste')?.addEventListener('click', async () => {
+      try {
+        if (!navigator.clipboard?.readText) throw new Error('Clipboard access is unavailable.');
+        applyCodeToEditor(await navigator.clipboard.readText());
+      } catch (error) {
+        showToast(error.message);
+      }
+    });
+    fetch('/api/settings').then(response => response.json()).then(data => {
+      const savedLanguage = { javascript: 'JavaScript', typescript: 'TypeScript', python: 'Python', golang: 'Go', rust: 'Rust', java: 'Java' }[data.settings?.language];
+      if (savedLanguage && !new URLSearchParams(location.search).has('project')) {
+        selectedLanguage = savedLanguage;
+        const selector = document.querySelector('[aria-label="Code language"]');
+        if (selector) selector.value = savedLanguage;
+      }
+    }).catch(error => showToast(`Unable to load saved editor settings: ${error.message}`));
+    const fileName = new URLSearchParams(location.search).get('project');
+    const historyEntryId = new URLSearchParams(location.search).get('history');
+    if (historyEntryId) {
+      if (fileName) {
+        fetch(`/api/projects/${encodeURIComponent(fileName)}`).then(async response => {
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Unable to load project.');
+          currentProject = data.project;
+        }).catch(error => showToast(error.message));
+      }
+      fetch(`/api/history/${encodeURIComponent(historyEntryId)}`).then(async response => {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Unable to load history entry.');
+        selectedLanguage = data.entry.language;
+        const selector = document.querySelector('[aria-label="Code language"]');
+        if (selector) selector.value = selectedLanguage;
+        applyCodeToEditor(data.entry.input);
+        fixedCode = data.entry.output;
+        renderFixedCode(fixedCode);
+        renderDiff(data.entry.input, data.entry.output);
+        document.querySelectorAll('.tab-btn[data-tab="fixed"], #apply-to-editor-btn, #apply-patch-direct-btn, #diff-accept-btn').forEach(button => {
+          button.disabled = false;
+          button.classList.remove('opacity-50');
+        });
+        document.querySelectorAll('.tab-btn[data-tab="diff"]').forEach(button => { button.disabled = false; button.classList.remove('opacity-50'); });
+        if (new URLSearchParams(location.search).get('apply') === '1') applyFixToEditor();
+      }).catch(error => showToast(error.message));
+    } else if (fileName) {
+      fetch(`/api/projects/${encodeURIComponent(fileName)}`).then(async response => {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Unable to load project.');
+        currentProject = data.project;
+        selectedLanguage = data.project.language;
+        const selector = document.querySelector('[aria-label="Code language"]');
+        if (selector) selector.value = selectedLanguage;
+        applyCodeToEditor(data.project.code);
+      }).catch(error => showToast(error.message));
+    }
     codeContentWrapper.addEventListener('input', () => {
       if (fixedCode) {
         fixedCode = '';
@@ -436,14 +612,7 @@
     });
 
     function getEditorCode() {
-      return Array.from(codeContentWrapper.children)
-        .filter(line => line.classList.contains('h-6'))
-        .map(line => {
-          const clone = line.cloneNode(true);
-          clone.querySelectorAll('[data-editor-decoration]').forEach(decoration => decoration.remove());
-          return clone.textContent.replace(/\u00a0/g, ' ').replace(/\s+$/, '');
-        })
-        .join('\n');
+      return codeContentWrapper.innerText.replace(/\u00a0/g, ' ').replace(/\n+$/, '');
     }
 
     function renderCode(container, code, lineClass) {
@@ -459,6 +628,34 @@
     function renderFixedCode(code) {
       const preview = document.getElementById('fixed-code-preview');
       if (preview) renderCode(preview, code, 'whitespace-pre');
+    }
+
+    function renderDiff(original, updated) {
+      const panel = document.getElementById('tab-content-diff');
+      if (!panel) return;
+      const before = original.split('\n');
+      const after = updated.split('\n');
+      let prefix = 0;
+      while (prefix < before.length && prefix < after.length && before[prefix] === after[prefix]) prefix++;
+      let suffix = 0;
+      while (suffix < before.length - prefix && suffix < after.length - prefix &&
+             before[before.length - 1 - suffix] === after[after.length - 1 - suffix]) suffix++;
+      const removed = before.slice(prefix, before.length - suffix);
+      const added = after.slice(prefix, after.length - suffix);
+      panel.replaceChildren();
+      const heading = document.createElement('p');
+      heading.className = 'text-on-surface-variant';
+      heading.textContent = `${removed.length} removed · ${added.length} added lines`;
+      const diff = document.createElement('pre');
+      diff.className = 'whitespace-pre-wrap overflow-auto rounded-lg bg-surface-container-lowest p-space-md font-code-sm text-code-sm';
+      const lines = [
+        ...before.slice(0, prefix).map(line => `  ${line}`),
+        ...removed.map(line => `- ${line}`),
+        ...added.map(line => `+ ${line}`),
+        ...before.slice(before.length - suffix).map(line => `  ${line}`)
+      ];
+      diff.textContent = lines.join('\n');
+      panel.append(heading, diff);
     }
 
     function applyCodeToEditor(code) {
@@ -484,20 +681,7 @@
         showToast('The editor changed after the last fix. Run Fix Code again to refresh it.');
         return;
       }
-      if (!brokenLine) return;
-      brokenLine.innerHTML = `
-        <span class="text-secondary font-semibold">function</span> <span class="text-primary font-medium">hello</span><span class="text-on-surface">(</span><span class="text-tertiary">name</span><span class="text-on-surface">) {</span>
-        <span class="ml-3 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-secondary-container/30 text-secondary-fixed font-label-code text-label-code">
-          <span class="material-symbols-outlined text-xs">done</span>
-          Fixed
-        </span>
-      `;
-      if (gutterLine2) {
-        gutterLine2.classList.remove('text-error');
-        gutterLine2.classList.add('text-outline');
-        gutterLine2.innerHTML = `<span>2</span>`;
-      }
-      showToast('Fixed syntax error in Line 2! Ready to run.');
+      showToast('No successful AI result is available to apply.');
     }
 
     const applyToEditorBtn = document.getElementById('apply-to-editor-btn');
@@ -520,7 +704,11 @@
 
     const btnFixCode = document.getElementById('btn-fix-code');
     if (btnFixCode) {
-      btnFixCode.addEventListener('click', async () => {
+      const actionLabel = btnFixCode.querySelector('.tracking-wide');
+      if (selectedTask !== 'fix' && actionLabel) actionLabel.textContent = `Run ${selectedTask} analysis`;
+      btnFixCode.addEventListener('click', () => runAiTask(selectedTask || 'fix'));
+    }
+    async function runAiTask(task) {
         const code = getEditorCode();
         if (!code.trim()) {
           showToast('Add code to the editor before requesting a fix.');
@@ -534,21 +722,35 @@
         if (bolt) bolt.style.display = 'none';
 
         try {
-          const response = await fetch('/api/fix', {
+          const response = await fetch(task === 'fix' ? '/api/fix' : '/api/ai', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code, language: 'JavaScript' })
+            body: JSON.stringify({ code, language: selectedLanguage, task, projectId: currentProject?.id })
           });
           const result = await response.json();
-          if (!response.ok || !result.success || typeof result.fixedCode !== 'string') {
+          if (!response.ok || !result.success || typeof result.result !== 'string') {
             throw new Error(result.error || `Fix request failed (${response.status}).`);
           }
 
-          fixedCode = result.fixedCode;
-          fixResultStale = false;
-          renderFixedCode(fixedCode);
-          activateTab('fixed');
-          showToast('AI fix is ready to review.');
+          if (task === 'fix' || task === 'complete' || task === 'refactor' || task === 'comments') {
+            fixedCode = result.result;
+            fixResultStale = false;
+            renderFixedCode(fixedCode);
+            renderDiff(code, fixedCode);
+            document.querySelectorAll('.tab-btn[data-tab="fixed"], .tab-btn[data-tab="diff"], #apply-to-editor-btn, #apply-patch-direct-btn, #diff-accept-btn').forEach(button => {
+              button.disabled = false;
+              button.classList.remove('opacity-50');
+            });
+            activateTab('fixed');
+          } else {
+            analysisPanel.replaceChildren();
+            const output = document.createElement('pre');
+            output.className = 'whitespace-pre-wrap text-on-surface';
+            output.textContent = result.result;
+            analysisPanel.appendChild(output);
+            activateTab('analysis');
+          }
+          showToast('AI result is ready to review.');
         } catch (error) {
           showToast(error.message || 'Unable to fix code. Please try again.');
         } finally {
@@ -556,7 +758,6 @@
           if (spinner) spinner.style.display = 'none';
           if (bolt) bolt.style.display = '';
         }
-      });
     }
 
     // Copy button
@@ -585,6 +786,27 @@
       }
     });
 
+    const projectSaveButton = Array.from(document.querySelectorAll('button')).find(button => button.textContent.trim() === 'Save Project');
+    if (projectSaveButton) {
+      projectSaveButton.removeAttribute('data-unavailable');
+      projectSaveButton.addEventListener('click', async () => {
+        const name = prompt('Project name');
+        if (!name) return;
+        try {
+          const response = await fetch('/api/projects', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, language: selectedLanguage, code: getEditorCode() })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Unable to save project.');
+          showToast('Project saved.');
+        } catch (error) {
+          showToast(error.message);
+        }
+      });
+    }
+
       })();
 </script></main></div><script>
 (() => {
@@ -602,7 +824,7 @@
   };
   document.addEventListener('click', (event) => {
     if (!(event.target instanceof Element)) return;
-    const control = event.target.closest('[data-unavailable], a[href="#"]');
+    const control = event.target.closest('[data-unavailable]');
     if (!control) return;
     event.preventDefault();
     event.stopImmediatePropagation();

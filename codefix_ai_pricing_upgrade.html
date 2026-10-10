@@ -297,7 +297,7 @@
 <span class="material-symbols-outlined text-primary text-xl">contact_support</span>
 <span class="font-body-md text-body-md text-on-surface">Have a custom infrastructure requirement or self-hosting inquiry?</span>
 </div>
-<a class="font-label-ui text-label-ui text-primary font-semibold hover:underline shrink-0" href="#" data-unavailable="Sales contact is not configured in this build.">Talk with an engineer →</a>
+<a class="font-label-ui text-label-ui text-primary font-semibold hover:underline shrink-0" href="codefix_ai_login.html" data-unavailable="Sales contact is not configured in this build.">Talk with an engineer →</a>
 </div>
 </div>
 </div>
@@ -368,7 +368,7 @@
   };
   document.addEventListener('click', (event) => {
     if (!(event.target instanceof Element)) return;
-    const control = event.target.closest('[data-unavailable], a[href="#"]');
+    const control = event.target.closest('[data-unavailable]');
     if (!control) return;
     event.preventDefault();
     event.stopImmediatePropagation();
